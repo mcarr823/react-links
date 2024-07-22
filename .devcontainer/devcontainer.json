@@ -1,0 +1,8 @@
+{
+	"name": "Node.js & TypeScript",
+	"updateContentCommand": "npm i --prefix /workspace/src",
+	"workspaceFolder": "/workspace",
+	"service": "node",
+	"dockerComposeFile": "docker-compose.yml",
+	"shutdownAction": "stopCompose"
+}

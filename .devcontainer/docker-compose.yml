@@ -1,0 +1,7 @@
+services:
+  node:
+    image: mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm
+    volumes:
+      - ..:/workspace:cached
+    #command: npm run dev --prefix /workspace/src
+    command: sleep infinity
