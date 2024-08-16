@@ -8,7 +8,15 @@ export default function Page() {
 
   const model = HomeViewModel()
 
-  const linkGroups = model.groups.map(g => (<LinkGroupView group={g} />))
+  const linkGroups = model.groups.map((g, i) => (
+    <LinkGroupView
+      key={i}
+      group={g}
+      removeGroup={() => model.removeGroup(i)}
+      removeLink={(link) => model.removeLink(i, link)}
+      addLink={() => model.addLink(i)}
+    />
+  ))
 
   return (
     <div className="ms-3 me-3 p-3">
