@@ -8,12 +8,16 @@ export default function LinkView(args: ILinkView){
     // TODO implement favicon
 
     return (
-        <li className="list-group-item d-flex justify-content-between align-items-start">
+        <a
+            href={url}
+            className="list-group-item list-group-item-action"
+            target="_blank"
+        >
             <div className="ms-2 me-auto">
                 <div className="fw-bold">{name}</div>
                 {url}
             </div>
-        </li>    
+        </a>
     )
 
 }
