@@ -17,13 +17,26 @@ export default function HomeViewModel(): IHomeViewModel {
         }
     }, [loading])
 
+    const addGroup = () => {
+        const newGroup = new LinkGroup({
+            name: 'New Group',
+            links: []
+        })
+        setGroups([
+            ...groups,
+            newGroup
+        ])
+    }
+
 
     return {
-        groups
+        groups,
+        addGroup
     }
 
 }
 
 interface IHomeViewModel{
     groups: Array<LinkGroup>;
+    addGroup: () => void;
 }
