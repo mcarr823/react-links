@@ -9,7 +9,8 @@ export default function LinkGroupView(args: ILinkGroupView){
 
     const linkViews = links.map(l => (<LinkView key={l.url} link={l}/>))
     const openAll = () => {
-        // TODO
+        links.forEach(l => window.open(l.url))
+        // TODO find a way to prompt the user for permission before running this code
     }
     const edit = () => {
         // TODO
