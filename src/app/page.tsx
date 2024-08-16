@@ -12,7 +12,10 @@ export default function Page() {
   const linkGroups = model.groups.map(g => (<LinkGroupView group={g} />))
 
   return (
-    <div className="container">{linkGroups}</div>
+    <div className="ms-3 me-3 p-3 row">
+      <h2 className="p-3">Links</h2>
+      {linkGroups}
+    </div>
   )
 
 }
