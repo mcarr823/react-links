@@ -28,12 +28,14 @@ export default function LinkGroupView(args: ILinkGroupView){
                             <button
                                 className="btn btn-outline-warning ms-1"
                                 onClick={edit}
+                                title="Edit"
                                 >
                                 <Pencil/>
                             </button>
                             <button
                                 className="btn btn-outline-primary ms-1"
                                 onClick={openAll}
+                                title="Open All"
                                 >
                                 <Folder2Open/>
                             </button>
@@ -41,7 +43,7 @@ export default function LinkGroupView(args: ILinkGroupView){
                     </div>
                 </div>
                 <div className="card-body">
-                    <div className="list-group">
+                    <div className="list-group list-group-flush">
                         {linkViews}
                     </div>
                 </div>
