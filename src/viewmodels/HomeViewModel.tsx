@@ -70,7 +70,6 @@ export default function HomeViewModel(): IHomeViewModel {
         g.links.splice(link, 1)
         setGroups([
             ...groups.slice(0,group),
-            g,
             ...groups.slice(group+1)
         ])
     }
