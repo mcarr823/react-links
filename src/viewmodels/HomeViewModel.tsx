@@ -19,7 +19,10 @@ export default function HomeViewModel(): IHomeViewModel {
     }, [loading])
 
     const addGroup = () => {
+        const ids = groups.map(l => l.id)
+        const biggestId = Math.max(...ids)
         const newGroup = new LinkGroup({
+            id: biggestId + 1,
             name: 'New Group',
             links: []
         })

@@ -18,6 +18,7 @@ test("Constructor test", () => {
     })
     const links = [link1, link2]
     const args: ILinkGroup = {
+        id: 1,
         name:"My link group",
         links
     }
@@ -25,5 +26,6 @@ test("Constructor test", () => {
 
     expect(group.name).toBe(args.name)
     expect(group.links).toBe(links)
+    expect(group.id).toBe(1)
 
 })

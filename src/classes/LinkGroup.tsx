@@ -7,6 +7,7 @@ import Link from "./Link";
  */
 export default class LinkGroup{
 
+    id: number;
     name: string;
     links: Array<Link>;
 
@@ -15,12 +16,14 @@ export default class LinkGroup{
      * @param links The links which belong to this group
      */
     constructor(args: ILinkGroup){
+        this.id = args.id
         this.name = args.name
         this.links = args.links
     }
 }
 
 export interface ILinkGroup{
+    id: number;
     name: string;
     links: Array<Link>;
 }
