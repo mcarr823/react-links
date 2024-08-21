@@ -1,5 +1,8 @@
 import Link from "classes/Link"
 import LinkGroup from "classes/LinkGroup"
+import IDeleteLinkGroupRequest from "interfaces/IDeleteLinkGroupRequest"
+import IPatchLinkGroupRequest from "interfaces/IPatchLinkGroupRequest"
+import IPutLinkGroupRequest from "interfaces/IPutLinkGroupRequest"
 import { useEffect, useState } from "react"
 
 export default function HomeViewModel(): IHomeViewModel {
