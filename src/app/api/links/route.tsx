@@ -1,36 +1,27 @@
-import Link from "classes/Link"
 import LinkGroup, { ILinkGroup } from "classes/LinkGroup"
+import { readFile } from "node:fs/promises"
 
 export const dynamic = 'force-dynamic' // defaults to auto
 
+export const dataFile = "data/links.json"
+
 /**
- * Hard-coded test data for now.
- * TODO actual implementation
- * 
  * @returns An array of LinkGroup objects
  */
 export async function GET(request: Request) {
 
-    const link1 = new Link({
-        name:'GitHub',
-        url:'https://github.com',
-        favicon:''
-    })
-    const link2 = new Link({
-        name:'Bitbucket',
-        url:'https://bitbucket.com',
-        favicon:''
-    })
-    const links = [link1, link2]
-    const args: ILinkGroup = {
-        name:"My link group",
-        links
+    const groups = Array<LinkGroup>()
+
+    try {
+        const arr: Array<ILinkGroup> = await readFile(dataFile)
+        .then(b => b.toString())
+        .then(s => JSON.parse(s))
+        arr.map(g => new LinkGroup(g))
+            .forEach(g => groups.push(g))
+    } catch (error) {
+        console.error(error)
     }
-    const group = new LinkGroup(args)
-    const groups = [group]
 
     return Response.json(groups)
 
 }
-
-

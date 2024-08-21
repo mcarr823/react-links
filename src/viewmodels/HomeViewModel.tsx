@@ -9,10 +9,10 @@ export default function HomeViewModel(): IHomeViewModel {
 
     useEffect(() => {
         if (loading){
+            setLoading(false)
             fetch("/api/links", {
                 method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-                //body: JSON.stringify({ time: new Date().toISOString() }),
+                headers: { 'Content-Type': 'application/json' }
             }).then(res => res.json())
             .then((groupArr: Array<LinkGroup>) => setGroups(groupArr))
         }
