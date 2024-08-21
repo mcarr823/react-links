@@ -5,7 +5,7 @@ import Link from "./Link";
  * 
  * TODO add other parameters, such as color, icon, etc.
  */
-export default class LinkGroup{
+export default class LinkGroup implements ILinkGroup{
 
     id: number;
     name: string;
@@ -20,6 +20,7 @@ export default class LinkGroup{
         this.name = args.name
         this.links = args.links
     }
+
 }
 
 export interface ILinkGroup{
