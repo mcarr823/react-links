@@ -32,6 +32,14 @@ export default function HomeViewModel(): IHomeViewModel {
         ])
     }
 
+    const updateGroup = (i: number, linkGroup: LinkGroup) => {
+        setGroups([
+            ...groups.slice(0,i),
+            linkGroup,
+            ...groups.slice(i+1)
+        ])
+    }
+
     const removeGroup = (i: number) => {
         setGroups([
             ...groups.slice(0,i),
@@ -69,6 +77,7 @@ export default function HomeViewModel(): IHomeViewModel {
         groups,
         addGroup,
         removeGroup,
+        updateGroup,
         addLink,
         removeLink
     }
@@ -79,6 +88,7 @@ interface IHomeViewModel{
     groups: Array<LinkGroup>;
     addGroup: () => void;
     removeGroup: (i: number) => void;
+    updateGroup: (i: number, linkGroup: LinkGroup) => void;
     addLink: (i: number) => void;
     removeLink: (group: number, link: number) => void;
 }

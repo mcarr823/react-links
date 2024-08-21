@@ -7,7 +7,7 @@ export default function LinkGroupView(args: ILinkGroupView){
 
     const [editMode, setEditMode] = useState<boolean>(false)
 
-    const { group, removeGroup, removeLink, addLink } = args
+    const { group, removeGroup, updateGroup, removeLink, addLink } = args
     const { name, links } = group
 
     const linkViews = links.map((l, i) => (
@@ -29,7 +29,8 @@ export default function LinkGroupView(args: ILinkGroupView){
         setEditMode(false)
     }
     const save = () => {
-        // TODO
+        updateGroup()
+        setEditMode(false)
     }
 
     return (
@@ -144,6 +145,7 @@ function Footer(args : IFooter){
 interface ILinkGroupView{
     group: LinkGroup;
     removeGroup: () => void;
+    updateGroup: () => void;
     removeLink: (i: number) => void;
     addLink: () => void;
 }

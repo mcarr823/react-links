@@ -15,6 +15,7 @@ export default function Page() {
       removeGroup={() => model.removeGroup(i)}
       removeLink={(link) => model.removeLink(i, link)}
       addLink={() => model.addLink(i)}
+      updateGroup={() => model.updateGroup(i, g)}
     />
   ))
 

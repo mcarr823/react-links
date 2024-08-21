@@ -7,6 +7,7 @@ export default function LinkView(args: ILinkView){
     const { name, url } = link
     // const favicon = link.getFavicon()
     // TODO implement favicon
+    // TODO update name and url in parent when they're changed
 
     if (isEditing){
         return (
