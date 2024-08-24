@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import LinkGroup from "classes/LinkGroup"
 import { dataFile } from "../links/route"
 import { GET } from "./route"
@@ -11,10 +15,10 @@ test("GET - invalid request", async () => {
     const output = JSON.stringify([])
     await writeFile(dataFile, output)
 
-    const req = new NextRequest("")
+    const requestObj = {} as any;
     let threwAnError = false
     try {
-        await GET(req)
+        await GET(requestObj)
     } catch (error) {
         threwAnError = true
     }
@@ -29,16 +33,12 @@ test("GET - record doesn't exist", async () => {
     await writeFile(dataFile, output)
 
     const body: IGetLinkGroupRequest = { id:0 }
-    const strBody = JSON.stringify(body)
-    const req = new NextRequest(strBody)
-    let threwAnError = false
-    try {
-        await GET(req)
-    } catch (error) {
-        threwAnError = true
-    }
+    const requestObj = {
+        json: async () => (body),
+    } as any;
+    const response = await GET(requestObj)
 
-    expect(threwAnError).toBe(true)
+    expect(response.ok).toBe(false)
 
 })
 
@@ -51,10 +51,11 @@ test("GET - record does exist", async () => {
     const output = JSON.stringify([row])
     await writeFile(dataFile, output)
 
-    const body: IGetLinkGroupRequest = { id:0 }
-    const strBody = JSON.stringify(body)
-    const req = new NextRequest(strBody)
-    const response: Response = await GET(req)
+    const body: IGetLinkGroupRequest = { id }
+    const requestObj = {
+        json: async () => (body),
+    } as any;
+    const response: Response = await GET(requestObj)
     const json: LinkGroup = await response.json()
 
     expect(json.id).toBe(id)

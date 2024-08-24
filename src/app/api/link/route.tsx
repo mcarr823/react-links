@@ -9,17 +9,12 @@ import IDeleteLinkGroupRequest from "interfaces/IDeleteLinkGroupRequest"
 export const dynamic = 'force-dynamic' // defaults to auto
 
 /**
- * Hard-coded test data for now.
- * TODO actual implementation
- * 
  * @returns A LinkGroup object
  */
 export async function GET(request: Request) {
 
     const json: IGetLinkGroupRequest = await request.json()
     const id = json.id
-
-    // TODO get the link group with the name of json.name
 
     const linkGroups: Array<LinkGroup> = await getLinks(request).then(r => r.json())
     const link = linkGroups.find(g => g.id == id)
@@ -73,8 +68,13 @@ export async function PATCH(request: Request) {
 
 export async function DELETE(request: Request) {
 
-    const json: IDeleteLinkGroupRequest = await request.json()
-    const id = json.id
+    let id: number
+    try {
+        const json: IDeleteLinkGroupRequest = await request.json()
+        id = json.id 
+    } catch (error) {
+        return Response.error()
+    }
 
     const linkGroups: Array<LinkGroup> = await getLinks(request).then(r => r.json())
     const index = linkGroups.findIndex(g => g.id == id)
@@ -88,7 +88,7 @@ export async function DELETE(request: Request) {
     ]
 
     const output = JSON.stringify(updatedGroups)
-    await writeFile(dataFile, output.toString())
+    await writeFile(dataFile, output)
 
     return Response.json({})
 

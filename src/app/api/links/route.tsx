@@ -17,9 +17,10 @@ export async function GET(request: Request) {
         .then(b => b.toString())
         .then(s => JSON.parse(s))
         arr.map(g => new LinkGroup(g))
+            .filter(g => g.validate())
             .forEach(g => groups.push(g))
     } catch (error) {
-        console.error(error)
+        return Response.error()
     }
 
     return Response.json(groups)

@@ -21,6 +21,12 @@ export default class LinkGroup implements ILinkGroup{
         this.links = args.links
     }
 
+    validate(): boolean {
+        return typeof this.id !== 'undefined' &&
+                typeof this.name !== 'undefined' &&
+                typeof this.links !== 'undefined'
+    }
+
 }
 
 export interface ILinkGroup{

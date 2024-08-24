@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import { ILinkGroup } from "classes/LinkGroup"
 import { dataFile, GET } from "./route"
 import { writeFile } from "node:fs/promises"
@@ -8,11 +12,9 @@ test("Get all link groups - invalid json", async () => {
 
     await writeFile(dataFile, "<xml/>")
 
-    const req = new NextRequest("")
-    const results = await GET(req)
-    const groups: Array<ILinkGroup> = await results.json()
-
-    expect(groups.length).toBe(0)
+    const requestObj = {} as any;
+    const results = await GET(requestObj)
+    expect(results.ok).toBe(false)
 
 })
 
@@ -21,8 +23,8 @@ test("Get all link groups - no links", async () => {
     const output = JSON.stringify([])
     await writeFile(dataFile, output)
 
-    const req = new NextRequest("")
-    const results = await GET(req)
+    const requestObj = {} as any;
+    const results = await GET(requestObj)
     const groups: Array<ILinkGroup> = await results.json()
 
     expect(groups.length).toBe(0)
@@ -46,11 +48,11 @@ test("Get all link groups - 1 group, 2 links", async () => {
         }),
     ]
     const linkGroups: ILinkGroup = { id, name, links }
-    const output = JSON.stringify(linkGroups)
+    const output = JSON.stringify([linkGroups])
     await writeFile(dataFile, output)
 
-    const req = new NextRequest("")
-    const results = await GET(req)
+    const requestObj = {} as any;
+    const results = await GET(requestObj)
     const groups: Array<ILinkGroup> = await results.json()
 
     expect(groups.length).toBe(1)

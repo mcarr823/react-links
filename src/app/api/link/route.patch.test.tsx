@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import LinkGroup, { ILinkGroup } from "classes/LinkGroup"
 import { dataFile } from "../links/route"
 import { PATCH } from "./route"
@@ -12,10 +16,10 @@ test("PATCH - invalid request", async () => {
     const output = JSON.stringify([])
     await writeFile(dataFile, output)
 
-    const req = new NextRequest("")
+    const requestObj = {} as any;
     let threwAnError = false
     try {
-        await PATCH(req)
+        await PATCH(requestObj)
     } catch (error) {
         threwAnError = true
     }
@@ -34,16 +38,12 @@ test("PATCH - record not found", async () => {
     const links: Array<Link> = []
     const linkGroup = new LinkGroup({ id, name, links })
     const body: IPatchLinkGroupRequest = { linkGroup }
-    const strBody = JSON.stringify(body)
-    const req = new NextRequest(strBody)
-    let threwAnError = false
-    try {
-        await PATCH(req)
-    } catch (error) {
-        threwAnError = true
-    }
+    const requestObj = {
+        json: async () => (body),
+    } as any;
+    const response = await PATCH(requestObj)
 
-    expect(threwAnError).toBe(true)
+    expect(response.ok).toBe(false)
 
 })
 
@@ -58,9 +58,10 @@ test("PATCH - record found", async () => {
 
     linkGroup.name = 'test2'
     const body: IPatchLinkGroupRequest = { linkGroup }
-    const strBody = JSON.stringify(body)
-    const req = new NextRequest(strBody)
-    await PATCH(req)
+    const requestObj = {
+        json: async () => (body),
+    } as any;
+    await PATCH(requestObj)
     // TODO readfile and check if the patch succeeded
 
 })

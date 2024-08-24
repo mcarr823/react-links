@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import LinkGroup, { ILinkGroup } from "classes/LinkGroup"
 import { dataFile } from "../links/route"
 import { PUT } from "./route"
@@ -8,10 +12,10 @@ import IPutLinkGroupRequest from "interfaces/IPutLinkGroupRequest"
 
 test("PUT - invalid request", async () => {
 
-    const req = new NextRequest("")
+    const requestObj = {} as any;
     let threwAnError = false
     try {
-        await PUT(req)
+        await PUT(requestObj)
     } catch (error) {
         threwAnError = true
     }
@@ -30,16 +34,18 @@ test("PUT - valid request", async () => {
     const links: Array<Link> = []
     const linkGroup = new LinkGroup({ id, name, links })
     const body: IPutLinkGroupRequest = { linkGroup }
-    const strBody = JSON.stringify(body)
-    const req = new NextRequest(strBody)
-    await PUT(req)
+    const requestObj = {
+        json: async () => (body),
+    } as any;
+    await PUT(requestObj)
 
     const buf = await readFile(dataFile)
     const str = buf.toString()
-    const json: ILinkGroup = JSON.parse(str)
+    const json: [ILinkGroup] = JSON.parse(str)
 
-    expect(json.id).toBe(id)
-    expect(json.name).toBe(name)
-    expect(json.links.length).toBe(links.length)
+    expect(json.length).toBe(1)
+    expect(json[0].id).toBe(id)
+    expect(json[0].name).toBe(name)
+    expect(json[0].links.length).toBe(links.length)
 
 })

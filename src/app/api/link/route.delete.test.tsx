@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import LinkGroup, { ILinkGroup } from "classes/LinkGroup"
 import { dataFile } from "../links/route"
 import { DELETE } from "./route"
@@ -12,15 +16,10 @@ test("DELETE - invalid request", async () => {
     const output = JSON.stringify([])
     await writeFile(dataFile, output)
 
-    const req = new NextRequest("")
-    let threwAnError = false
-    try {
-        await DELETE(req)
-    } catch (error) {
-        threwAnError = true
-    }
+    const requestObj = {} as any;
+    const response = await DELETE(requestObj)
 
-    expect(threwAnError).toBe(true)
+    expect(response.ok).toBe(false)
 
 })
 
@@ -30,16 +29,12 @@ test("DELETE - record doesn't exist", async () => {
     await writeFile(dataFile, output)
 
     const body: IDeleteLinkGroupRequest = { id:0 }
-    const strBody = JSON.stringify(body)
-    const req = new NextRequest(strBody)
-    let threwAnError = false
-    try {
-        await DELETE(req)
-    } catch (error) {
-        threwAnError = true
-    }
+    const requestObj = {
+        json: async () => (body),
+    } as any;
+    const response = await DELETE(requestObj)
 
-    expect(threwAnError).toBe(true)
+    expect(response.ok).toBe(false)
 
 })
 
@@ -52,21 +47,18 @@ test("DELETE - record does exist", async () => {
     const output = JSON.stringify([row])
     await writeFile(dataFile, output)
 
-    // First delete request should succeed
     const body: IDeleteLinkGroupRequest = { id:1 }
-    const strBody = JSON.stringify(body)
-    const req = new NextRequest(strBody)
-    await DELETE(req)
+    const requestObj = {
+        json: async () => (body),
+    } as any;
+
+    // First delete request should succeed
+    const response1 = await DELETE(requestObj)
+    expect(response1.ok).toBe(true)
 
     // Second delete request should fail, since the first
     // request deleted the record
-    let threwAnError = false
-    try {
-        await DELETE(req)
-    } catch (error) {
-        threwAnError = true
-    }
-
-    expect(threwAnError).toBe(true)
+    const response2 = await DELETE(requestObj)
+    expect(response2.ok).toBe(false)
 
 })
