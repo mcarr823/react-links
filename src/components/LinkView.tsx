@@ -13,13 +13,14 @@ export default function LinkView(args: ILinkView){
         return (
             <div className="list-group-item">
                 <div className="ms-2 me-auto">
-                    <input className="form-control" defaultValue={name}/>
-                    <input className="form-control" defaultValue={url}/>
+                    <input className="form-control" defaultValue={name} role="linkViewName"/>
+                    <input className="form-control" defaultValue={url} role="linkViewUrl"/>
                 </div>
                 <button
                     className="btn btn-outline-danger ms-1"
                     onClick={removeLink}
                     title="Remove"
+                    role="removeLinkButton"
                     >
                     <Trash/>
                 </button>
@@ -34,8 +35,8 @@ export default function LinkView(args: ILinkView){
             target="_blank"
         >
             <div className="ms-2 me-auto">
-                <div className="fw-bold">{name}</div>
-                {url}
+                <div className="fw-bold" role="linkViewName">{name}</div>
+                <div role="linkViewUrl">{url}</div>
             </div>
         </a>
     )
