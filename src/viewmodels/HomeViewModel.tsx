@@ -1,4 +1,3 @@
-import Link from "classes/Link"
 import LinkGroup from "classes/LinkGroup"
 import IDeleteLinkGroupRequest from "interfaces/IDeleteLinkGroupRequest"
 import IPatchLinkGroupRequest from "interfaces/IPatchLinkGroupRequest"
@@ -72,38 +71,12 @@ export default function HomeViewModel(): IHomeViewModel {
         }).then(res => res.json())
     }
 
-    const addLink = (i: number) => {
-        const g = groups[i]
-        const link = new Link({
-            name: 'New Link',
-            url: '',
-            favicon: ''
-        })
-        g.links.push(link)
-        setGroups([
-            ...groups.slice(0,i),
-            g,
-            ...groups.slice(i+1)
-        ])
-    }
-
-    const removeLink = (group: number, link: number) => {
-        const g = groups[group]
-        g.links.splice(link, 1)
-        setGroups([
-            ...groups.slice(0,group),
-            ...groups.slice(group+1)
-        ])
-    }
-
 
     return {
         groups,
         addGroup,
         removeGroup,
-        updateGroup,
-        addLink,
-        removeLink
+        updateGroup
     }
 
 }
@@ -113,6 +86,4 @@ export interface IHomeViewModel{
     addGroup: () => void;
     removeGroup: (i: number) => void;
     updateGroup: (i: number, linkGroup: LinkGroup) => void;
-    addLink: (i: number) => void;
-    removeLink: (group: number, link: number) => void;
 }

@@ -1,37 +1,30 @@
-import LinkGroup from "classes/LinkGroup"
+import LinkGroup from "classes/LinkGroup";
 import LinkView from "./LinkView"
 import { Check, Folder2Open, Pencil, Plus, Trash, X } from "react-bootstrap-icons"
-import { useState } from "react"
+import LinkGroupViewViewModel, { ILinkGroupViewViewModel } from "viewmodels/LinkGroupViewViewModel"
 
-export default function LinkGroupView(args: ILinkGroupView){
+export default function LinkGroupView({
+    initialLinkGroup,
+    model = LinkGroupViewViewModel(initialLinkGroup),
+    removeGroup,
+    updateGroup
+} : {
+    initialLinkGroup: LinkGroup;
+    model: ILinkGroupViewViewModel;
+    removeGroup: () => void;
+    updateGroup: (linkGroup: LinkGroup) => void;
+}){
 
-    const [editMode, setEditMode] = useState<boolean>(false)
-
-    const { group, removeGroup, updateGroup, removeLink, addLink } = args
-    const { name, links } = group
+    const { name, links } = model.group
 
     const linkViews = links.map((l, i) => (
         <LinkView
             key={i}
             link={l}
-            isEditing={editMode}
-            removeLink={() => removeLink(i)}
+            isEditing={model.editMode}
+            removeLink={() => model.removeLink(i)}
         />
     ))
-    const openAll = () => {
-        links.forEach(l => window.open(l.url))
-        // TODO find a way to prompt the user for permission before running this code
-    }
-    const edit = () => {
-        setEditMode(true)
-    }
-    const cancel = () => {
-        setEditMode(false)
-    }
-    const save = () => {
-        updateGroup()
-        setEditMode(false)
-    }
 
     return (
         <div className="col col-xxl-3 col-xl-4 col-lg-6 col-sm-12 mb-3">
@@ -42,13 +35,7 @@ export default function LinkGroupView(args: ILinkGroupView){
                             {name}
                         </div>
                         <div className="col col-6">
-                            <ActionButtons
-                                isEditing={editMode}
-                                edit={edit}
-                                openAll={openAll}
-                                cancel={cancel}
-                                save={save}
-                            />
+                            <ActionButtons model={model} updateGroup={updateGroup}/>
                         </div>
                     </div>
                 </div>
@@ -57,22 +44,36 @@ export default function LinkGroupView(args: ILinkGroupView){
                         {linkViews}
                     </div>
                 </div>
-                <Footer
-                    isEditing={editMode}
-                    removeGroup={removeGroup}
-                    addLink={addLink}
-                />
+                <Footer model={model} removeGroup={removeGroup}/>
             </div>
         </div>
     )
 
 }
 
-function ActionButtons(args: IActionButtons){
+function ActionButtons({
+    model,
+    updateGroup
+} : {
+    model: ILinkGroupViewViewModel
+    updateGroup: (linkGroup: LinkGroup) => void;
+}){
 
-    const { isEditing, edit, openAll, cancel, save } = args
+    const edit = () => {
+        model.setEditMode(true)
+    }
+    const cancel = () => {
+        model.reset()
+        model.setEditMode(false)
+    }
+    const save = () => {
+        updateGroup(model.group)
+        model.setEditMode(false)
+    }
 
-    if (isEditing){
+    const { editMode, openAll } = model
+
+    if (editMode){
         return (
             <>
                 <button
@@ -113,11 +114,17 @@ function ActionButtons(args: IActionButtons){
     )
 }
 
-function Footer(args : IFooter){
+function Footer({
+    model,
+    removeGroup
+} : {
+    model: ILinkGroupViewViewModel
+    removeGroup: () => void;
+}){
 
-    const { isEditing, removeGroup, addLink } = args
+    const { editMode, addLink } = model
 
-    if (!isEditing){
+    if (!editMode){
         return (<></>)
     }
 
@@ -140,26 +147,4 @@ function Footer(args : IFooter){
         </div>
     )
 
-}
-
-interface ILinkGroupView{
-    group: LinkGroup;
-    removeGroup: () => void;
-    updateGroup: () => void;
-    removeLink: (i: number) => void;
-    addLink: () => void;
-}
-
-interface IActionButtons{
-    isEditing: boolean;
-    edit: () => void;
-    openAll: () => void;
-    cancel: () => void;
-    save: () => void;
-}
-
-interface IFooter{
-    isEditing: boolean;
-    removeGroup: () => void;
-    addLink: () => void;
 }

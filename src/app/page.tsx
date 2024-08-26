@@ -3,6 +3,7 @@
 import LinkGroupView from "@/components/LinkGroupView";
 import { Plus } from "react-bootstrap-icons";
 import HomeViewModel, { IHomeViewModel } from "viewmodels/HomeViewModel";
+import LinkGroupViewViewModel from "viewmodels/LinkGroupViewViewModel";
 
 export default function Page({
   model = HomeViewModel()
@@ -10,16 +11,16 @@ export default function Page({
   model: IHomeViewModel
 }) {
 
-  const linkGroups = model.groups.map((g, i) => (
-    <LinkGroupView
-      key={i}
-      group={g}
-      removeGroup={() => model.removeGroup(i)}
-      removeLink={(link) => model.removeLink(i, link)}
-      addLink={() => model.addLink(i)}
-      updateGroup={() => model.updateGroup(i, g)}
-    />
-  ))
+  const linkGroups = model.groups.map((g, i) => {
+    return (
+      <LinkGroupView
+        key={i}
+        initialLinkGroup={g}
+        removeGroup={() => model.removeGroup(i)}
+        updateGroup={() => model.updateGroup(i, g)}
+      />
+    )
+  })
 
   return (
     <div className="ms-3 me-3 p-3">

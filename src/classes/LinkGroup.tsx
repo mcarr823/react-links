@@ -27,6 +27,10 @@ export default class LinkGroup implements ILinkGroup{
                 typeof this.links !== 'undefined'
     }
 
+    clone(): LinkGroup{
+        return new LinkGroup(this)
+    }
+
 }
 
 export interface ILinkGroup{
