@@ -2,11 +2,13 @@
 
 import LinkGroupView from "@/components/LinkGroupView";
 import { Plus } from "react-bootstrap-icons";
-import HomeViewModel from "viewmodels/HomeViewModel";
+import HomeViewModel, { IHomeViewModel } from "viewmodels/HomeViewModel";
 
-export default function Page() {
-
-  const model = HomeViewModel()
+export default function Page({
+  model = HomeViewModel()
+} : {
+  model: IHomeViewModel
+}) {
 
   const linkGroups = model.groups.map((g, i) => (
     <LinkGroupView

@@ -108,7 +108,7 @@ export default function HomeViewModel(): IHomeViewModel {
 
 }
 
-interface IHomeViewModel{
+export interface IHomeViewModel{
     groups: Array<LinkGroup>;
     addGroup: () => void;
     removeGroup: (i: number) => void;
