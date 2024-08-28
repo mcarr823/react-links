@@ -3,7 +3,6 @@
 import LinkGroupView from "@/components/LinkGroupView";
 import { Plus } from "react-bootstrap-icons";
 import HomeViewModel, { IHomeViewModel } from "viewmodels/HomeViewModel";
-import LinkGroupViewViewModel from "viewmodels/LinkGroupViewViewModel";
 
 export default function Page({
   model = HomeViewModel()
