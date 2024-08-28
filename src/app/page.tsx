@@ -29,7 +29,7 @@ export default function Page({
         className="btn btn-outline-success"
         onClick={model.addGroup}
         title="Add New Link Group"
-        role="addLinkButton"
+        role="addLinkGroupButton"
       ><Plus/> New Link Group</button>
       <div className="row mt-3" role="linkGroups">
         {linkGroups}

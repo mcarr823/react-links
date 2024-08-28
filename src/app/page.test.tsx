@@ -48,7 +48,7 @@ it("Home page", () => {
   expect(screen.getByRole("heading")).toHaveTextContent("Links");
 
   expect(groups.length).toBe(1)
-  screen.getByRole("addLinkButton").click()
+  screen.getByRole("addLinkGroupButton").click()
   expect(groups.length).toBe(2)
   
 });
