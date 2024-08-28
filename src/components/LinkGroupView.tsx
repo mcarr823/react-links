@@ -31,7 +31,7 @@ export default function LinkGroupView({
             <div className="card">
                 <div className="card-header">
                     <div className="row">
-                        <div className="col col-6">
+                        <div className="col col-6" role="linkGroupViewName">
                             {name}
                         </div>
                         <div className="col col-6">
@@ -80,6 +80,7 @@ function ActionButtons({
                     className="btn btn-outline-danger ms-1"
                     onClick={cancel}
                     title="Cancel"
+                    role="cancelLinkGroupButton"
                     >
                     <X/>
                 </button>
@@ -87,6 +88,7 @@ function ActionButtons({
                     className="btn btn-outline-success ms-1"
                     onClick={save}
                     title="Save"
+                    role="saveLinkGroupButton"
                     >
                     <Check/>
                 </button>
@@ -100,6 +102,7 @@ function ActionButtons({
                 className="btn btn-outline-warning ms-1"
                 onClick={edit}
                 title="Edit"
+                role="editLinkGroupButton"
                 >
                 <Pencil/>
             </button>
@@ -107,6 +110,7 @@ function ActionButtons({
                 className="btn btn-outline-primary ms-1"
                 onClick={openAll}
                 title="Open All"
+                role="openAllLinkGroupButton"
                 >
                 <Folder2Open/>
             </button>
@@ -134,6 +138,7 @@ function Footer({
                 className="btn btn-outline-danger ms-1"
                 onClick={removeGroup}
                 title="Remove"
+                role="removeLinkGroupButton"
                 >
                 <Trash/> Delete Link Group
             </button>
@@ -141,6 +146,7 @@ function Footer({
                 className="btn btn-outline-success ms-1"
                 onClick={addLink}
                 title="Add Link"
+                role="addLinkButton"
                 >
                 <Plus/> Add Link
             </button>
