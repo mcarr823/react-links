@@ -7,7 +7,7 @@ export default function LinkGroupViewViewModel(
 ) : ILinkGroupViewViewModel{
 
     const [editMode, setEditMode] = useState<boolean>(false)
-    const [group, setGroup] = useState<LinkGroup>(initialValue.clone())
+    const [group, setGroup] = useState<LinkGroup>(initialValue)
 
     const openAll = () => {
         group.links.forEach(l => window.open(l.url))

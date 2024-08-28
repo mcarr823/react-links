@@ -5,12 +5,12 @@ import LinkGroupViewViewModel, { ILinkGroupViewViewModel } from "viewmodels/Link
 
 export default function LinkGroupView({
     initialLinkGroup,
-    model = LinkGroupViewViewModel(initialLinkGroup),
+    model = LinkGroupViewViewModel(new LinkGroup(initialLinkGroup)),
     removeGroup,
     updateGroup
 } : {
     initialLinkGroup: LinkGroup;
-    model: ILinkGroupViewViewModel;
+    model?: ILinkGroupViewViewModel;
     removeGroup: () => void;
     updateGroup: (linkGroup: LinkGroup) => void;
 }){

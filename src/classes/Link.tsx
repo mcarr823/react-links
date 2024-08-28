@@ -1,7 +1,7 @@
 /**
  * Represents a URL displayed on the website.
  */
-export default class Link {
+export default class Link implements ILink {
     
     name: string;
     url: string;
