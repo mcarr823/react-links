@@ -4,8 +4,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest --watch",
-    "test:ci": "jest --ci"
+    "test": "jest --watch --runInBand",
+    "test:ci": "jest --ci --runInBand"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
