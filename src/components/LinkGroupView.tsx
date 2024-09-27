@@ -1,30 +1,23 @@
 import LinkGroup from "classes/LinkGroup";
 import LinkView from "./LinkView"
-import { Check, Folder2Open, Pencil, Plus, Trash, X } from "react-bootstrap-icons"
-import LinkGroupViewViewModel, { ILinkGroupViewViewModel } from "viewmodels/LinkGroupViewViewModel"
+import { Folder2Open, Pencil } from "react-bootstrap-icons"
 
 export default function LinkGroupView({
-    initialLinkGroup,
-    model = LinkGroupViewViewModel(new LinkGroup(initialLinkGroup)),
-    removeGroup,
-    updateGroup
+    group,
+    edit,
+    openLinks
 } : {
-    initialLinkGroup: LinkGroup;
-    model?: ILinkGroupViewViewModel;
-    removeGroup: () => void;
-    updateGroup: (linkGroup: LinkGroup) => void;
+    group: LinkGroup;
+    edit: () => void;
+    openLinks: () => void;
 }){
 
-    const { name, links } = model.group
-
-    const linkViews = links.map((l, i) => (
-        <LinkView
-            key={i}
-            link={l}
-            isEditing={model.editMode}
-            removeLink={() => model.removeLink(i)}
-        />
-    ))
+    // For each link in the group, filter out any which don't have
+    // a URL entered.
+    // For the rest, display them as LinkView components.
+    const linkViews = group.links
+        .filter(l => l.url.length > 0)
+        .map((l, i) => <LinkView key={i} link={l}/>)
 
     return (
         <div className="col col-xxl-3 col-xl-4 col-lg-6 col-sm-12 mb-3">
@@ -32,10 +25,10 @@ export default function LinkGroupView({
                 <div className="card-header">
                     <div className="row">
                         <div className="col col-6" role="linkGroupViewName">
-                            {name}
+                            {group.name}
                         </div>
                         <div className="col col-6">
-                            <ActionButtons model={model} updateGroup={updateGroup}/>
+                            <ActionButtons edit={edit} openLinks={openLinks}/>
                         </div>
                     </div>
                 </div>
@@ -44,7 +37,6 @@ export default function LinkGroupView({
                         {linkViews}
                     </div>
                 </div>
-                <Footer model={model} removeGroup={removeGroup}/>
             </div>
         </div>
     )
@@ -52,49 +44,12 @@ export default function LinkGroupView({
 }
 
 function ActionButtons({
-    model,
-    updateGroup
+    edit,
+    openLinks
 } : {
-    model: ILinkGroupViewViewModel
-    updateGroup: (linkGroup: LinkGroup) => void;
+    edit: () => void;
+    openLinks: () => void;
 }){
-
-    const edit = () => {
-        model.setEditMode(true)
-    }
-    const cancel = () => {
-        model.reset()
-        model.setEditMode(false)
-    }
-    const save = () => {
-        updateGroup(model.group)
-        model.setEditMode(false)
-    }
-
-    const { editMode, openAll } = model
-
-    if (editMode){
-        return (
-            <>
-                <button
-                    className="btn btn-outline-danger ms-1"
-                    onClick={cancel}
-                    title="Cancel"
-                    role="cancelLinkGroupButton"
-                    >
-                    <X/>
-                </button>
-                <button
-                    className="btn btn-outline-success ms-1"
-                    onClick={save}
-                    title="Save"
-                    role="saveLinkGroupButton"
-                    >
-                    <Check/>
-                </button>
-            </>
-        )
-    }
 
     return (
         <>
@@ -108,7 +63,7 @@ function ActionButtons({
             </button>
             <button
                 className="btn btn-outline-primary ms-1"
-                onClick={openAll}
+                onClick={openLinks}
                 title="Open All"
                 role="openAllLinkGroupButton"
                 >
@@ -118,39 +73,3 @@ function ActionButtons({
     )
 }
 
-function Footer({
-    model,
-    removeGroup
-} : {
-    model: ILinkGroupViewViewModel
-    removeGroup: () => void;
-}){
-
-    const { editMode, addLink } = model
-
-    if (!editMode){
-        return (<></>)
-    }
-
-    return (
-        <div className="card-footer">
-            <button
-                className="btn btn-outline-danger ms-1"
-                onClick={removeGroup}
-                title="Remove"
-                role="removeLinkGroupButton"
-                >
-                <Trash/> Delete Link Group
-            </button>
-            <button
-                className="btn btn-outline-success ms-1"
-                onClick={addLink}
-                title="Add Link"
-                role="addLinkButton"
-                >
-                <Plus/> Add Link
-            </button>
-        </div>
-    )
-
-}
