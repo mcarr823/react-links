@@ -4,6 +4,8 @@
 import { render, screen } from "@testing-library/react";
 import Page from "./page";
 import { IHomeViewModel } from "viewmodels/HomeViewModel";
+import { IEditLinkGroupModalViewModel } from "viewmodels/EditLinkGroupModalViewModel";
+import LinkGroup from "classes/LinkGroup";
 
 it("Home page", () => {
 
@@ -11,12 +13,29 @@ it("Home page", () => {
 
   const model: IHomeViewModel = {
     groups:[],
-    addGroup: () => { addGroupClicked++ },
+    addOrUpdateGroup: () => {},
     removeGroup: () => {},
-    updateGroup: () => {},
+    openAll: () => {}
   }
 
-  render(<Page model={model}/>);
+  const linkGroup = new LinkGroup({
+    id:1,
+    name:'test',
+    links:[]
+})
+  const editModel: IEditLinkGroupModalViewModel = {
+    id: -1,
+    visible: false,
+    name: '',
+    links: [],
+    removeLink: () => {},
+    addLink: () => {},
+    show: () => { addGroupClicked++ },
+    hide: () => {},
+    save: () => { return linkGroup },
+}
+
+  render(<Page model={model} editModel={editModel}/>);
   expect(screen.getByRole("heading")).toHaveTextContent("Links");
 
   expect(addGroupClicked).toBe(0)

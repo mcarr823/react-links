@@ -20,14 +20,18 @@ export default function HomeViewModel(): IHomeViewModel {
         }
     }, [loading])
 
-    const addGroup = () => {
+    const findGroup = (linkGroup: LinkGroup) : number => {
+        const index = groups.findIndex(g => g.id == linkGroup.id)
+        if (index == -1)
+            throw new Error("Group not found")
+        else
+            return index
+    }
+
+    const addGroup = (linkGroup: LinkGroup) => {
         const ids = groups.map(l => l.id)
         const biggestId = Math.max(...ids)
-        const linkGroup = new LinkGroup({
-            id: biggestId + 1,
-            name: 'New Group',
-            links: []
-        })
+        linkGroup.id = biggestId + 1
         setGroups([
             ...groups,
             linkGroup
@@ -41,7 +45,10 @@ export default function HomeViewModel(): IHomeViewModel {
         }).then(res => res.json())
     }
 
-    const updateGroup = (i: number, linkGroup: LinkGroup) => {
+    const updateGroup = (linkGroup: LinkGroup) => {
+
+        const i = findGroup(linkGroup)
+
         setGroups([
             ...groups.slice(0,i),
             linkGroup,
@@ -56,8 +63,17 @@ export default function HomeViewModel(): IHomeViewModel {
         }).then(res => res.json())
     }
 
-    const removeGroup = (i: number) => {
-        const id = groups[i].id
+    const addOrUpdateGroup = (linkGroup: LinkGroup) => {
+        if (linkGroup.id == -1)
+            addGroup(linkGroup)
+        else
+            updateGroup(linkGroup)
+    }
+
+    const removeGroup = (id: number) => {
+        
+        const i = groups.findIndex(g => g.id == id)
+
         setGroups([
             ...groups.slice(0,i),
             ...groups.slice(i+1)
@@ -71,19 +87,26 @@ export default function HomeViewModel(): IHomeViewModel {
         }).then(res => res.json())
     }
 
+    const openAll = (i: number) => {
+        groups[i].links
+            .filter(l => l.url.length > 0)
+            .forEach(l => window.open(l.url))
+        // TODO find a way to prompt the user for permission before running this code
+    }
+
 
     return {
         groups,
-        addGroup,
+        addOrUpdateGroup,
         removeGroup,
-        updateGroup
+        openAll
     }
 
 }
 
 export interface IHomeViewModel{
     groups: Array<LinkGroup>;
-    addGroup: () => void;
-    removeGroup: (i: number) => void;
-    updateGroup: (i: number, linkGroup: LinkGroup) => void;
+    addOrUpdateGroup: (linkGroup: LinkGroup) => void;
+    removeGroup: (id: number) => void;
+    openAll: (i: number) => void;
 }

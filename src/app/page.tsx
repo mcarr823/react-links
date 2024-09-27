@@ -1,22 +1,26 @@
 "use client"
 
+import EditLinkGroupModal from "@/components/EditLinkGroupModal";
 import LinkGroupView from "@/components/LinkGroupView";
 import { Plus } from "react-bootstrap-icons";
+import EditLinkGroupModalViewModel, { IEditLinkGroupModalViewModel } from "viewmodels/EditLinkGroupModalViewModel";
 import HomeViewModel, { IHomeViewModel } from "viewmodels/HomeViewModel";
 
 export default function Page({
-  model = HomeViewModel()
+  model = HomeViewModel(),
+  editModel = EditLinkGroupModalViewModel()
 } : {
-  model: IHomeViewModel
+  model: IHomeViewModel;
+  editModel: IEditLinkGroupModalViewModel;
 }) {
 
   const linkGroups = model.groups.map((g, i) => {
     return (
       <LinkGroupView
         key={i}
-        initialLinkGroup={g}
-        removeGroup={() => model.removeGroup(i)}
-        updateGroup={() => model.updateGroup(i, g)}
+        group={g}
+        edit={() => editModel.show(g)}
+        openLinks={() => model.openAll(i)}
       />
     )
   })
@@ -26,13 +30,20 @@ export default function Page({
       <h2 className="p-3" role="heading">Links</h2>
       <button
         className="btn btn-outline-success"
-        onClick={model.addGroup}
+        onClick={() => { editModel.show(null) }}
         title="Add New Link Group"
         role="addLinkGroupButton"
+        data-bs-toggle="modal"
       ><Plus/> New Link Group</button>
       <div className="row mt-3" role="linkGroups">
         {linkGroups}
       </div>
+
+      <EditLinkGroupModal
+        model={editModel}
+        removeGroup={ model.removeGroup }
+        addOrUpdateGroup={ model.addOrUpdateGroup }
+        />
     </div>
   )
 
