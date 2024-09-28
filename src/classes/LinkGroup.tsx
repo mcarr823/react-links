@@ -21,6 +21,15 @@ export default class LinkGroup implements ILinkGroup{
         this.links = args.links
     }
 
+    /**
+     * Validates the LinkGroup by checking that none of the
+     * fields are undefined.
+     *
+     * They could be undefined if the LinkGroup was cast from
+     * a JSON object, for example.
+     *
+     * @return true if the link group is valid, otherwise false.
+     */
     validate(): boolean {
         return typeof this.id !== 'undefined' &&
                 typeof this.name !== 'undefined' &&
@@ -34,7 +43,25 @@ export default class LinkGroup implements ILinkGroup{
 }
 
 export interface ILinkGroup{
+
+    /**
+     * Sequential ID number used to uniquely identify this LinkGroup.
+     */
     id: number;
+
+    /**
+     * Name of this LinkGroup.
+     * eg. "Streaming services" or "Game websites"
+     *
+     * Duplicates are allowed. So are empty strings.
+     */
     name: string;
+
+    /**
+     * Array of links contained within this LinkGroup.
+     *
+     * An empty list is allowed.
+     */
     links: Array<Link>;
+
 }

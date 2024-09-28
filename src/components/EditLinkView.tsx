@@ -1,6 +1,14 @@
 import Link from "classes/Link"
 import { Trash } from "react-bootstrap-icons"
 
+/**
+ * Component for editing a single Link.
+ *
+ * Shows the link's name and URL as input fields.
+ *
+ * @param link Link object to edit
+ * @param removeLink Callback to invoke when the Remove button is pressed
+ */
 export default function EditLinkView(args: IEditLinkView){
 
     const { link, removeLink } = args

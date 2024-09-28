@@ -1,5 +1,14 @@
 import Link from "classes/Link"
 
+/**
+ * Component for displaying a single Link.
+ *
+ * Shows the link's name and URL.
+ *
+ * Can be clicked to open the URL.
+ *
+ * @param link Link object to display
+ */
 export default function LinkView(args: ILinkView){
 
     const { link } = args

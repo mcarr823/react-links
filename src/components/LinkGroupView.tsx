@@ -2,6 +2,15 @@ import LinkGroup from "classes/LinkGroup";
 import LinkView from "./LinkView"
 import { Folder2Open, Pencil } from "react-bootstrap-icons"
 
+/**
+ * Component for displaying a group of links.
+ *
+ * Shows the group's name and all of its links.
+ *
+ * @param group LinkGroup object to display
+ * @param edit Callback to invoke when the Edit button is clicked
+ * @param openLinks Callback to invoke when the Open All button is clicked
+ */
 export default function LinkGroupView({
     group,
     edit,
