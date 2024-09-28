@@ -18,8 +18,15 @@ it("EditLinkView component", () => {
     const removeLink = () => {
         removeButtonClicked++
     }
+    const updateLink = () => {}
 
-    render(<EditLinkView link={link} removeLink={removeLink}/>);
+    render(
+        <EditLinkView
+            link={link}
+            removeLink={removeLink}
+            updateLink={updateLink}
+            />
+    );
 
     expect(screen.getByRole("editLinkViewName")).toHaveValue(link.name);
     expect(screen.getByRole("editLinkViewUrl")).toHaveValue(link.url);

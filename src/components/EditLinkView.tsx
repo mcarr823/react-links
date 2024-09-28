@@ -1,5 +1,6 @@
 import Link from "classes/Link"
 import { Trash } from "react-bootstrap-icons"
+import SimpleInput from "./SimpleInput";
 
 /**
  * Component for editing a single Link.
@@ -9,13 +10,29 @@ import { Trash } from "react-bootstrap-icons"
  * @param link Link object to edit
  * @param removeLink Callback to invoke when the Remove button is pressed
  */
-export default function EditLinkView(args: IEditLinkView){
+export default function EditLinkView({
+    link,
+    updateLink,
+    removeLink
+}: {
+    link: Link;
+    updateLink: (newLink: Link) => void;
+    removeLink: () => void;
+}){
 
-    const { link, removeLink } = args
-    const { name, url } = link
+    const { name, url, favicon } = link
     // const favicon = link.getFavicon()
     // TODO implement favicon
     // TODO update name and url in parent when they're changed
+
+    const onChangeName = (value: string) => {
+        const newLink = new Link({ name:value, url, favicon })
+        updateLink(newLink)
+    }
+    const onChangeUrl = (value: string) => {
+        const newLink = new Link({ name, url:value, favicon })
+        updateLink(newLink)
+    }
 
     return (
         <div className="list-group-item mt-2">
@@ -31,18 +48,23 @@ export default function EditLinkView(args: IEditLinkView){
                     </button>
                 </div>
                 <div className="col-4">
-                    <input className="form-control" defaultValue={name} role="editLinkViewName" placeholder="Website Name"/>
+                    <SimpleInput
+                        value={name}
+                        setValue={onChangeName}
+                        role="editLinkViewName"
+                        placeholder="Name"
+                        />
                 </div>
                 <div className="col-6">
-                    <input className="form-control" defaultValue={url} role="editLinkViewUrl" placeholder="URL"/>
+                    <SimpleInput
+                        value={url}
+                        setValue={onChangeUrl}
+                        role="editLinkViewUrl"
+                        placeholder="URL"
+                        />
                 </div>
             </div>
         </div>
     )
 
-}
-
-interface IEditLinkView{
-    link: Link;
-    removeLink: () => void;
 }

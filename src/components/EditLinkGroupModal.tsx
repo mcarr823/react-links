@@ -2,6 +2,7 @@ import LinkGroup from "classes/LinkGroup";
 import { Check, Plus, Trash } from "react-bootstrap-icons"
 import { IEditLinkGroupModalViewModel } from "viewmodels/EditLinkGroupModalViewModel";
 import EditLinkView from "./EditLinkView";
+import SimpleInput from "./SimpleInput";
 
 export default function EditLinkGroupModal({
     model,
@@ -32,6 +33,7 @@ export default function EditLinkGroupModal({
         <EditLinkView
             key={i}
             link={l}
+            updateLink={(newLink) => { model.updateLink(i, newLink) }}
             removeLink={() => model.removeLink(i)}
         />
     ))
@@ -58,8 +60,12 @@ export default function EditLinkGroupModal({
                     <div className="modal-body">
                     
                         <div className="mb-3">
-                            <label htmlFor="exampleFormControlInput1" className="form-label">Group name</label>
-                            <input type="text" className="form-control" id="exampleFormControlInput1" defaultValue={model.name}/>
+                            <SimpleInput
+                                value={model.name}
+                                setValue={model.setName}
+                                placeholder="Group name"
+                                role="editLinkGroupName"
+                                />
                         </div>
 
                         <div className="mb-3">
