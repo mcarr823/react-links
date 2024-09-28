@@ -32,6 +32,14 @@ export default function EditLinkGroupModalViewModel(): IEditLinkGroupModalViewMo
         ])
     }
 
+    const updateLink = (i: number, link: Link) => {
+        setLinks([
+            ...links.splice(0, i),
+            link,
+            ...links.splice(i+1)
+        ])
+    }
+
     const removeLink = (link: number) => {
         setLinks([
             ...links.splice(0, link),
@@ -70,9 +78,10 @@ export default function EditLinkGroupModalViewModel(): IEditLinkGroupModalViewMo
     return {
         id,
         visible,
-        name,
+        name, setName,
         links,
         removeLink,
+        updateLink,
         addLink,
         show, hide,
         save
@@ -101,6 +110,13 @@ export interface IEditLinkGroupModalViewModel{
     name: string;
 
     /**
+     * Updates the value of `name`, replacing it with `newValue`.
+     * 
+     * @param newValue New name for this linkgroup.
+     */
+    setName: (newValue: string) => void;
+
+    /**
      * The current array of links being displayed on the modal.
      */
     links: Array<Link>;
@@ -111,6 +127,14 @@ export interface IEditLinkGroupModalViewModel{
      * @param i Index of the link to remove
      */
     removeLink: (i: number) => void;
+
+    /**
+     * Replaces the link at index `i`.
+     * 
+     * @param i Index of the link to update
+     * @param link New link to replace the old one with
+     */
+    updateLink: (i: number, link: Link) => void;
 
     /**
      * Adds a new blank link to the modal, for which the user can
