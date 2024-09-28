@@ -1,4 +1,5 @@
-import LinkGroup, { ILinkGroup } from "classes/LinkGroup"
+import LinkGroup from "classes/LinkGroup"
+import ILinkGroup from "interfaces/ILinkGroup"
 import { readFile } from "node:fs/promises"
 
 export const dynamic = 'force-dynamic' // defaults to auto

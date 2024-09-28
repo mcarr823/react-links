@@ -2,10 +2,11 @@
  * @jest-environment node
  */
 
-import { ILinkGroup } from "classes/LinkGroup"
+import ILinkGroup from "interfaces/ILinkGroup"
 import { dataFile, GET } from "./route"
 import { writeFile } from "node:fs/promises"
-import Link, { ILink } from "classes/Link"
+import Link from "classes/Link"
+import ILink from "interfaces/ILink"
 import { NextRequest } from "next/server"
 
 test("Get all link groups - invalid json", async () => {

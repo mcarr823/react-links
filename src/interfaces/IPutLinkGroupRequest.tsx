@@ -1,4 +1,4 @@
-import { ILinkGroup } from "classes/LinkGroup";
+import ILinkGroup from "interfaces/ILinkGroup";
 
 /**
  * Interface defining the expected format of a LinkGroup PUT request.

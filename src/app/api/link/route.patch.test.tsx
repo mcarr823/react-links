@@ -2,11 +2,13 @@
  * @jest-environment node
  */
 
-import LinkGroup, { ILinkGroup } from "classes/LinkGroup"
+import LinkGroup from "classes/LinkGroup"
+import ILinkGroup from "interfaces/ILinkGroup"
 import { dataFile } from "../links/route"
 import { PATCH } from "./route"
 import { writeFile } from "node:fs/promises"
-import Link, { ILink } from "classes/Link"
+import Link from "classes/Link"
+import ILink from "interfaces/ILink"
 import { NextRequest, NextResponse } from "next/server"
 import IGetLinkGroupRequest from "interfaces/IGetLinkGroupRequest"
 import IPatchLinkGroupRequest from "interfaces/IPatchLinkGroupRequest"

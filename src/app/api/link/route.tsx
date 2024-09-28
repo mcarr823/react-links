@@ -1,4 +1,5 @@
-import LinkGroup, { ILinkGroup } from "classes/LinkGroup"
+import LinkGroup from "classes/LinkGroup"
+import ILinkGroup from "interfaces/ILinkGroup"
 import IGetLinkGroupRequest from "interfaces/IGetLinkGroupRequest"
 import IPutLinkGroupRequest from "interfaces/IPutLinkGroupRequest"
 import { GET as getLinks, dataFile } from "../links/route"

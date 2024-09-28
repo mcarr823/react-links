@@ -2,7 +2,8 @@
  * @jest-environment node
  */
 
-import LinkGroup, { ILinkGroup } from "classes/LinkGroup"
+import LinkGroup from "classes/LinkGroup"
+import ILinkGroup from "interfaces/ILinkGroup"
 import { dataFile } from "../links/route"
 import { PUT } from "./route"
 import { writeFile, readFile } from "node:fs/promises"

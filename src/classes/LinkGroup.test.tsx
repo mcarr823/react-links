@@ -1,5 +1,6 @@
 import Link from "./Link"
-import LinkGroup, { ILinkGroup } from "./LinkGroup"
+import LinkGroup from "./LinkGroup"
+import { ILinkGroup } from "../interfaces/ILinkGroup"
 
 /**
  * A basic test to make sure that the constructor works as intended.
