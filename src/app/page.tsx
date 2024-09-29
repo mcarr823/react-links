@@ -2,7 +2,7 @@
 
 import EditLinkGroupModalViewModel from "viewmodels/EditLinkGroupModalViewModel";
 import HomeViewModel from "viewmodels/HomeViewModel";
-import HomePage from "../pages/HomePage";
+import HomePage from "../components/pages/HomePage";
 
 export default function Page() {
 

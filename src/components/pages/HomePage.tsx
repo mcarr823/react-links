@@ -1,7 +1,7 @@
 "use client";
 
-import EditLinkGroupModal from "@/components/EditLinkGroupModal";
-import LinkGroupView from "@/components/LinkGroupView";
+import EditLinkGroupModal from "components/views/EditLinkGroupModal";
+import LinkGroupView from "components/views/LinkGroupView";
 import { Plus } from "react-bootstrap-icons";
 import { IEditLinkGroupModalViewModel } from "viewmodels/EditLinkGroupModalViewModel";
 import { IHomeViewModel } from "viewmodels/HomeViewModel";
