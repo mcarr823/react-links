@@ -1,5 +1,7 @@
 # Links
 
+[![Jest](https://github.com/mcarr823/react-links/actions/workflows/jest.yml/badge.svg)](https://github.com/mcarr823/react-links/actions/workflows/jest.yml)
+
 Links is a free, open-source, self-hosted website which stores and syncs your bookmarks.
 
 It aims to provide a replacement for your browser's new tab page, and to provide an alternative to your browser's built-in bookmarks.
