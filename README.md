@@ -6,4 +6,6 @@ It aims to provide a replacement for your browser's new tab page, and to provide
 
 Its primary focus is on providing syncable tab groups, which allow you to open several websites at once.
 
-* Note: this software is a work in progress and is not currently functional.
+* Note: this software is a work in progress and is not fully functional.
+
+![Home screen](screenshots/home.png)
