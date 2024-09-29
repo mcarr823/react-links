@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { render, screen } from "@testing-library/react";
-import Page from "./page";
+import HomePage from "./HomePage";
 import { IHomeViewModel } from "viewmodels/HomeViewModel";
 import { IEditLinkGroupModalViewModel } from "viewmodels/EditLinkGroupModalViewModel";
 import LinkGroup from "classes/LinkGroup";
@@ -27,15 +27,17 @@ it("Home page", () => {
     id: -1,
     visible: false,
     name: '',
+    setName: () => {},
     links: [],
     removeLink: () => {},
+    updateLink: () => {},
     addLink: () => {},
     show: () => { addGroupClicked++ },
     hide: () => {},
     save: () => { return linkGroup },
 }
 
-  render(<Page model={model} editModel={editModel}/>);
+  render(<HomePage model={model} editModel={editModel}/>);
   expect(screen.getByRole("heading")).toHaveTextContent("Links");
 
   expect(addGroupClicked).toBe(0)
