@@ -2,10 +2,11 @@ import LinkGroup from "classes/LinkGroup"
 import ILinkGroup from "interfaces/ILinkGroup"
 import IGetLinkGroupRequest from "interfaces/IGetLinkGroupRequest"
 import IPutLinkGroupRequest from "interfaces/IPutLinkGroupRequest"
-import { GET as getLinks, dataFile } from "../links/route"
+import { GET as getLinks } from "../links/route"
 import { writeFile } from "node:fs/promises"
 import IPatchLinkGroupRequest from "interfaces/IPatchLinkGroupRequest"
 import IDeleteLinkGroupRequest from "interfaces/IDeleteLinkGroupRequest"
+import { dataFile } from "setup/constants"
 
 export const dynamic = 'force-dynamic' // defaults to auto
 

@@ -3,12 +3,12 @@
  */
 
 import LinkGroup from "classes/LinkGroup"
-import { dataFile } from "../links/route"
 import { GET } from "./route"
 import { writeFile } from "node:fs/promises"
 import Link from "classes/Link"
 import { NextRequest } from "next/server"
 import IGetLinkGroupRequest from "interfaces/IGetLinkGroupRequest"
+import { dataFile } from "setup/constants"
 
 test("GET - invalid request", async () => {
     

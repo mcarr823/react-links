@@ -3,11 +3,12 @@
  */
 
 import ILinkGroup from "interfaces/ILinkGroup"
-import { dataFile, GET } from "./route"
+import { GET } from "./route"
 import { writeFile } from "node:fs/promises"
 import Link from "classes/Link"
 import ILink from "interfaces/ILink"
 import { NextRequest } from "next/server"
+import { dataFile } from "setup/constants"
 
 test("Get all link groups - invalid json", async () => {
 

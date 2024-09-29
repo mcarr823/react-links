@@ -4,7 +4,6 @@
 
 import LinkGroup from "classes/LinkGroup"
 import ILinkGroup from "interfaces/ILinkGroup"
-import { dataFile } from "../links/route"
 import { DELETE } from "./route"
 import { writeFile } from "node:fs/promises"
 import Link from "classes/Link"
@@ -12,6 +11,7 @@ import ILink from "interfaces/ILink"
 import { NextRequest, NextResponse } from "next/server"
 import IGetLinkGroupRequest from "interfaces/IGetLinkGroupRequest"
 import IDeleteLinkGroupRequest from "interfaces/IDeleteLinkGroupRequest"
+import { dataFile } from "setup/constants"
 
 test("DELETE - invalid request", async () => {
     

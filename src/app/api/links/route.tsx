@@ -1,10 +1,9 @@
 import LinkGroup from "classes/LinkGroup"
 import ILinkGroup from "interfaces/ILinkGroup"
 import { readFile } from "node:fs/promises"
+import { dataFile } from "setup/constants"
 
 export const dynamic = 'force-dynamic' // defaults to auto
-
-export const dataFile = "data/links.json"
 
 /**
  * @returns An array of LinkGroup objects
