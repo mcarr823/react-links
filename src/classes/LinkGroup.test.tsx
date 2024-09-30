@@ -30,3 +30,34 @@ test("Constructor test", () => {
     expect(group.id).toBe(1)
 
 })
+
+/**
+ * Tests the validate function of the LinkGroup class.
+ * Expects the validation to succeed.
+ */
+test("Validation success", () => {
+
+    const args: ILinkGroup = {
+        id: 1,
+        name:"My link group",
+        links:[]
+    }
+    const group = new LinkGroup(args)
+    const valid = group.validate()
+
+    expect(valid).toBe(true)
+
+})
+
+/**
+ * Tests the validate function of the LinkGroup class.
+ * Expects the validation to fail.
+ */
+test("Validation failure", () => {
+
+    const group = {} as LinkGroup
+    const valid = group.validate()
+
+    expect(valid).toBe(false)
+
+})
