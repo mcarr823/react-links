@@ -37,7 +37,22 @@ export default function LinkGroupView({
                             {group.name}
                         </div>
                         <div className="col col-6">
-                            <ActionButtons edit={edit} openLinks={openLinks}/>
+                            <button
+                                className="btn btn-outline-warning ms-1"
+                                onClick={edit}
+                                title="Edit"
+                                role="editLinkGroupButton"
+                                >
+                                <Pencil/>
+                            </button>
+                            <button
+                                className="btn btn-outline-primary ms-1"
+                                onClick={openLinks}
+                                title="Open All"
+                                role="openAllLinkGroupButton"
+                                >
+                                <Folder2Open/>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -51,34 +66,3 @@ export default function LinkGroupView({
     )
 
 }
-
-function ActionButtons({
-    edit,
-    openLinks
-} : {
-    edit: () => void;
-    openLinks: () => void;
-}){
-
-    return (
-        <>
-            <button
-                className="btn btn-outline-warning ms-1"
-                onClick={edit}
-                title="Edit"
-                role="editLinkGroupButton"
-                >
-                <Pencil/>
-            </button>
-            <button
-                className="btn btn-outline-primary ms-1"
-                onClick={openLinks}
-                title="Open All"
-                role="openAllLinkGroupButton"
-                >
-                <Folder2Open/>
-            </button>
-        </>
-    )
-}
-

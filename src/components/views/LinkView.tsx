@@ -9,9 +9,12 @@ import Link from "classes/Link"
  *
  * @param link Link object to display
  */
-export default function LinkView(args: ILinkView){
+export default function LinkView({
+    link 
+}: {
+    link: Link;
+}){
 
-    const { link } = args
     const { name, url } = link
     // const favicon = link.getFavicon()
     // TODO implement favicon
@@ -30,8 +33,4 @@ export default function LinkView(args: ILinkView){
         </a>
     )
 
-}
-
-interface ILinkView{
-    link: Link;
 }

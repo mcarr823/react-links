@@ -20,14 +20,6 @@ export default function HomeViewModel(): IHomeViewModel {
         }
     }, [loading])
 
-    const findGroup = (linkGroup: LinkGroup) : number => {
-        const index = groups.findIndex(g => g.id == linkGroup.id)
-        if (index == -1)
-            throw new Error("Group not found")
-        else
-            return index
-    }
-
     const addGroup = (linkGroup: LinkGroup) => {
         const ids = groups.map(l => l.id)
         const biggestId = Math.max(...ids)
@@ -47,7 +39,7 @@ export default function HomeViewModel(): IHomeViewModel {
 
     const updateGroup = (linkGroup: LinkGroup) => {
 
-        const i = findGroup(linkGroup)
+        const i = groups.findIndex(g => g.id == linkGroup.id)
 
         setGroups([
             ...groups.slice(0,i),
