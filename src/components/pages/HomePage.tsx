@@ -6,6 +6,14 @@ import { Plus } from "react-bootstrap-icons";
 import { IEditLinkGroupModalViewModel } from "viewmodels/EditLinkGroupModalViewModel";
 import { IHomeViewModel } from "viewmodels/HomeViewModel";
 
+/**
+ * The main/home page of the website.
+ *
+ * @param model Viewmodel for this page which contains the link groups and
+ * functions shown and used by this page.
+ * @param editModel Viewmodel used by the popup which is shown when adding or
+ * modifying a link group.
+ */
 export default function HomePage({
   model, editModel
 }: {

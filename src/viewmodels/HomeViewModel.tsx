@@ -9,6 +9,8 @@ export default function HomeViewModel(): IHomeViewModel {
     const [groups, setGroups] = useState<Array<LinkGroup>>([])
     const [loading, setLoading] = useState<boolean>(true)
 
+    // Effect to download all of the linkgroups from the server
+    // when the viewmodel first loads.
     useEffect(() => {
         if (loading){
             setLoading(false)
@@ -21,56 +23,78 @@ export default function HomeViewModel(): IHomeViewModel {
     }, [loading])
 
     const addGroup = (linkGroup: LinkGroup) => {
+
+        // Find the largest ID out of the existing linkgroup entries,
+        // then add 1 to it in order to make a new sequential ID.
+        // Assign that new ID to the new linkgroup.
         const ids = groups.map(l => l.id)
         const biggestId = Math.max(...ids)
         linkGroup.id = biggestId + 1
+
+        // Add the new linkgroup to the end of the array
         setGroups([
             ...groups,
             linkGroup
         ])
         
+        // Send a PUT request to the server
         const req: IPutLinkGroupRequest = { linkGroup }
         fetch("/api/link", {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(req)
         }).then(res => res.json())
+
     }
 
     const updateGroup = (linkGroup: LinkGroup) => {
 
+        // Find the index of the group to update
         const i = groups.findIndex(g => g.id == linkGroup.id)
 
+        // Rebuild the array, substituting the entry at index `i`
+        // with the new entry.
         setGroups([
             ...groups.slice(0,i),
             linkGroup,
             ...groups.slice(i+1)
         ])
         
+        // Send a PATCH request to the server
         const req: IPatchLinkGroupRequest = { linkGroup }
         fetch("/api/link", {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(req)
         }).then(res => res.json())
+
     }
 
     const addOrUpdateGroup = (linkGroup: LinkGroup) => {
+
+        // If the linkGroup has an ID of -1, then it must be
+        // new, so add it to the array.
+        // If it has a different ID, then it's an existing group,
+        // so update it instead.
         if (linkGroup.id == -1)
             addGroup(linkGroup)
         else
             updateGroup(linkGroup)
+
     }
 
     const removeGroup = (id: number) => {
         
+        // Find the index of the group to remove
         const i = groups.findIndex(g => g.id == id)
 
+        // Rebuild the array without the item at that index
         setGroups([
             ...groups.slice(0,i),
             ...groups.slice(i+1)
         ])
         
+        // Send a DELETE request to the server
         const req: IDeleteLinkGroupRequest = { id }
         fetch("/api/link", {
             method: 'DELETE',
@@ -97,8 +121,35 @@ export default function HomeViewModel(): IHomeViewModel {
 }
 
 export interface IHomeViewModel{
+
+    /**
+     * Array of link groups to display on the home page.
+     */
     groups: Array<LinkGroup>;
+
+    /**
+     * Callback used to either create a new link group,
+     * or to update an existing one.
+     *
+     * @param linkGroup New linkgroup object to either add
+     * to the array, or to replace an existing array entry.
+     */
     addOrUpdateGroup: (linkGroup: LinkGroup) => void;
+
+    /**
+     * Callback used to remove a group from the array.
+     *
+     * @param id Unique ID used to identify the group to remove.
+     */
     removeGroup: (id: number) => void;
+
+    /**
+     * Callback used to open all of the links within a given
+     * linkgroup object at once.
+     *
+     * @param i Index of the linkgroup for which to open all
+     * of its links.
+     */
     openAll: (i: number) => void;
+
 }

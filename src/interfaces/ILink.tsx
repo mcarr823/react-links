@@ -1,4 +1,6 @@
-
+/**
+ * Interface which describes a Link object.
+ */
 export default interface ILink {
 
     /**

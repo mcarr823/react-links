@@ -1,6 +1,8 @@
 import Link from "../classes/Link";
 
-
+/**
+ * Interface which describes a LinkGroup object.
+ */
 export default interface ILinkGroup {
 
     /**

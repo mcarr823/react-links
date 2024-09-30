@@ -4,6 +4,14 @@ import { IEditLinkGroupModalViewModel } from "viewmodels/EditLinkGroupModalViewM
 import EditLinkView from "./EditLinkView";
 import SimpleInput from "./SimpleInput";
 
+/**
+ * Popup used for adding or modifying a linkgroup.
+ *
+ * @param model Viewmodel containing the group name, links, and functions
+ * for adding or editing a viewmodel.
+ * @param addOrUpdateGroup Callback to invoke when the Save button is pressed.
+ * @param removeGroup Callback to invoke when the Remove button is pressed.
+ */
 export default function EditLinkGroupModal({
     model,
     addOrUpdateGroup,
@@ -14,16 +22,23 @@ export default function EditLinkGroupModal({
     removeGroup: (id: number) => void;
 }){
 
+    // If the model isn't visible right now, just return an empty node.
     if (!model.visible){
         return (<></>)
     }
 
+    // Callback for the Save button.
+    // Saves a snapshot of the linkgroup which is being edited,
+    // passed it back to the addOrUpdateGroup callback, then hides
+    // the modal.
     const save = () => {
         const linkGroup = model.save()
         addOrUpdateGroup(linkGroup)
         model.hide()
     }
 
+    // Callback for the Remove Group button.
+    // Removes the group, then hides the modal.
     const remove = () => {
         removeGroup(model.id)
         model.hide()

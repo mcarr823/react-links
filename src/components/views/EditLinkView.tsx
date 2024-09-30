@@ -25,10 +25,15 @@ export default function EditLinkView({
     // TODO implement favicon
     // TODO update name and url in parent when they're changed
 
+    // Callback to invoke when the Name input value is modified.
+    // Generates a new Link class and passes it to the updateLink callback.
     const onChangeName = (value: string) => {
         const newLink = new Link({ name:value, url, favicon })
         updateLink(newLink)
     }
+
+    // Callback to invoke when the URL input value is modified.
+    // Generates a new Link class and passes it to the updateLink callback.
     const onChangeUrl = (value: string) => {
         const newLink = new Link({ name, url:value, favicon })
         updateLink(newLink)

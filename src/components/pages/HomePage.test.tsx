@@ -44,6 +44,6 @@ it("Home page", () => {
   screen.getByRole("addLinkGroupButton").click()
   expect(addGroupClicked).toBe(1)
 
-  // The other two buttons are tested in the LinkGroupView.test.tsx file instead
+  // The other buttons are tested in the LinkGroupView.test.tsx file instead
   
 });
