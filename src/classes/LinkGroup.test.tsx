@@ -55,7 +55,8 @@ test("Validation success", () => {
  */
 test("Validation failure", () => {
 
-    const group = {} as LinkGroup
+    const args = {} as ILinkGroup
+    const group = new LinkGroup(args)
     const valid = group.validate()
 
     expect(valid).toBe(false)
