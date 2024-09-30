@@ -11,3 +11,12 @@ Its primary focus is on providing syncable tab groups, which allow you to open s
 * Note: this software is a work in progress and is not fully functional.
 
 ![Home screen](screenshots/home.png)
+
+## TODO
+
+- Split back-end server and front-end website into separate repos
+- Add docker container and workflow
+- Create browser extension
+- Option to auto-sync with polling or websockets
+- Button to manually sync
+- Import and export
