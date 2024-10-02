@@ -10,6 +10,12 @@ import ILink from "interfaces/ILink"
 import { NextRequest } from "next/server"
 import { dataFile } from "setup/constants"
 
+/**
+ * Test how the app handles invalid JSON (or a non-existent dataFile).
+ *
+ * The expected behavior is for invalid JSON to return an empty list
+ * instead of an error. (The error will be logged on the server instead)
+ */
 test("Get all link groups - invalid json", async () => {
 
     await writeFile(dataFile, "<xml/>")
@@ -22,6 +28,9 @@ test("Get all link groups - invalid json", async () => {
 
 })
 
+/**
+ * Test how the app handles an empty JSON array.
+ */
 test("Get all link groups - no links", async () => {
 
     const output = JSON.stringify([])
@@ -35,6 +44,11 @@ test("Get all link groups - no links", async () => {
 
 })
 
+/**
+ * Test how the app handles a valid, non-empty JSON file.
+ *
+ * Validate all entries and make sure everything is parsed correctly.
+ */
 test("Get all link groups - 1 group, 2 links", async () => {
 
     const id = 123
