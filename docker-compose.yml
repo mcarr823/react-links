@@ -1,0 +1,8 @@
+services:
+  app:
+    # x86_64 version
+    image: ghcr.io/mcarr823/react-links:amd64
+    ports:
+      - 3000:3000
+    volumes:
+      - ./data:/app/data

@@ -23,6 +23,11 @@ For example, to run on an AMD64 device:
 
 `docker run -p 3000:3000 -v ./data:/app/data ghcr.io/mcarr823/react-links:amd64`
 
+
+### Docker Compose
+
+See the example [docker compose](docker-compose.yml) file.
+
 ## Development
 
 ### Dev Container
