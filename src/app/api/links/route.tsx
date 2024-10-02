@@ -20,7 +20,8 @@ export async function GET(request: Request) {
             .filter(g => g.validate())
             .forEach(g => groups.push(g))
     } catch (error) {
-        return Response.error()
+        // File doesn't exist or can't be read
+        console.error(error)
     }
 
     return Response.json(groups)

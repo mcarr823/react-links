@@ -16,7 +16,9 @@ test("Get all link groups - invalid json", async () => {
 
     const requestObj = {} as any;
     const results = await GET(requestObj)
-    expect(results.ok).toBe(false)
+    const groups: Array<ILinkGroup> = await results.json()
+
+    expect(groups.length).toBe(0)
 
 })
 
