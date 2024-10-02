@@ -31,9 +31,6 @@ RUN apk update && apk upgrade && apk add dumb-init && adduser -D nextuser
 # set work dir as app
 WORKDIR /app
 
-# copy the public folder from the project as this is not included in the build process
-COPY --from=build --chown=nextuser:nextuser /app/public ./public
-
 # copy the standalone folder inside the .next folder generated from the build process 
 COPY --from=build --chown=nextuser:nextuser /app/.next/standalone ./
 
