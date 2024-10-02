@@ -1,6 +1,7 @@
 # Links
 
 [![Jest](https://github.com/mcarr823/react-links/actions/workflows/jest.yml/badge.svg)](https://github.com/mcarr823/react-links/actions/workflows/jest.yml)
+[![Docker Image amd64](https://github.com/mcarr823/react-links/actions/workflows/docker-image.yml/badge.svg)](https://github.com/mcarr823/react-links/actions/workflows/docker-image.yml)
 
 Links is a free, open-source, self-hosted website which stores and syncs your bookmarks.
 
