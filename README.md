@@ -9,9 +9,19 @@ It aims to provide a replacement for your browser's new tab page, and to provide
 
 Its primary focus is on providing syncable tab groups, which allow you to open several websites at once.
 
-* Note: this software is a work in progress and is not fully functional.
-
 ![Home screen](screenshots/home.png)
+
+## Running
+
+### Docker
+
+You can run this website on your own machine via the official docker image on GitHub.
+
+It runs on port 3000 by default and requires the /app/data volume to be specified.
+
+For example, to run on an AMD64 device:
+
+`docker run -p 3000:3000 -v ./data:/app/data ghcr.io/mcarr823/react-links:amd64`
 
 ## Development
 
