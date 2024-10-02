@@ -2,7 +2,7 @@ name: Jest
 on: push
 jobs:
   test:
-    runs-on: [self-hosted, linux, ARM64]
+    runs-on: [self-hosted, linux, x64]
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js
