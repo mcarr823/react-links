@@ -1,5 +1,5 @@
 import Link from "./Link"
-import { ILink } from "../interfaces/ILink"
+import ILink from "../interfaces/ILink"
 
 /**
  * If a favicon is not defined, then getFavicon() should return
