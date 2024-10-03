@@ -2,6 +2,7 @@
 
 [![Jest](https://github.com/mcarr823/react-links/actions/workflows/jest.yml/badge.svg)](https://github.com/mcarr823/react-links/actions/workflows/jest.yml)
 [![Docker Image amd64](https://github.com/mcarr823/react-links/actions/workflows/docker-image.yml/badge.svg)](https://github.com/mcarr823/react-links/actions/workflows/docker-image.yml)
+[![Docker Image arm64](https://github.com/mcarr823/react-links/actions/workflows/docker-aarch64.yml/badge.svg)](https://github.com/mcarr823/react-links/actions/workflows/docker-aarch64.yml)
 
 Links is a free, open-source, self-hosted website which stores and syncs your bookmarks.
 
@@ -23,6 +24,9 @@ For example, to run on an AMD64 device:
 
 `docker run -p 3000:3000 -v ./data:/app/data ghcr.io/mcarr823/react-links:amd64`
 
+Or for ARM64 devices:
+
+`docker run -p 3000:3000 -v ./data:/app/data ghcr.io/mcarr823/react-links:arm64`
 
 ### Docker Compose
 
