@@ -18,7 +18,7 @@ export async function GET(request: Request) {
     const json: IGetLinkGroupRequest = await request.json()
     const id = json.id
 
-    const linkGroups: Array<LinkGroup> = await getLinks(request).then(r => r.json())
+    const linkGroups: Array<ILinkGroup> = await getLinks(request).then(r => r.json())
     const link = linkGroups.find(g => g.id == id)
     if (link)
         return Response.json(link)
@@ -49,7 +49,7 @@ export async function PATCH(request: Request) {
     const linkGroup = json.linkGroup
     const id = linkGroup.id
 
-    const linkGroups: Array<LinkGroup> = await getLinks(request).then(r => r.json())
+    const linkGroups: Array<ILinkGroup> = await getLinks(request).then(r => r.json())
     const index = linkGroups.findIndex(g => g.id == id)
 
     if (index == -1)
@@ -78,7 +78,7 @@ export async function DELETE(request: Request) {
         return Response.error()
     }
 
-    const linkGroups: Array<LinkGroup> = await getLinks(request).then(r => r.json())
+    const linkGroups: Array<ILinkGroup> = await getLinks(request).then(r => r.json())
     const index = linkGroups.findIndex(g => g.id == id)
 
     if (index == -1)
