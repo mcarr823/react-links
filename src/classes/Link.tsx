@@ -37,4 +37,15 @@ export default class Link implements ILink {
 
     }
 
+    /**
+     * Exports the link in Onetab's format, which is
+     * $url | $name
+     * eg. https://github.com | Github
+     * 
+     * @returns String in the format of $url | $name
+     */
+    exportOnetab(): String {
+        return `${this.url} | ${this.name}`
+    }
+
 }

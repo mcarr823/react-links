@@ -40,3 +40,19 @@ test("Actual favicon", () => {
     expect(l.getFavicon()).toBe("/data/favicons/favicon.ico")
 
 })
+
+/**
+ * Export a link in onetab format and check if it matches our expectations.
+ */
+test("Onetab export", () => {
+    
+    const args: ILink = {
+        name:'GitHub',
+        url:'https://github.com',
+        favicon:''
+    }
+    const l = new Link(args)
+
+    expect(l.exportOnetab()).toBe(`${args.url} | ${args.name}`)
+
+})

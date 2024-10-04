@@ -41,4 +41,14 @@ export default class LinkGroup implements ILinkGroup{
         return new LinkGroup(this)
     }
 
+    /**
+     * Exports the each link in Onetab's format, then puts them all
+     * in a newline-delimited string.
+     * 
+     * @returns Newline-delimited string of links in the Onetab format
+     */
+    exportOnetab(): String {
+        return this.links.map(l => l.exportOnetab()).join("\n")
+    }
+
 }
