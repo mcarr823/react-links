@@ -13,7 +13,7 @@ import { dataFile } from "setup/constants"
  *
  * Make sure the output matches the onetab format.
  */
-test("Get all link groups - 1 group, 2 links", async () => {
+test("GET /api/export/onetab", async () => {
 
     const id = 123
     const name = "test name"

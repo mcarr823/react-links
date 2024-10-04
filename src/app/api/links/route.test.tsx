@@ -5,9 +5,7 @@
 import ILinkGroup from "interfaces/ILinkGroup"
 import { GET } from "./route"
 import { writeFile } from "node:fs/promises"
-import Link from "classes/Link"
 import ILink from "interfaces/ILink"
-import { NextRequest } from "next/server"
 import { dataFile } from "setup/constants"
 
 /**
@@ -53,17 +51,17 @@ test("Get all link groups - 1 group, 2 links", async () => {
 
     const id = 123
     const name = "test name"
-    const links: Array<Link> = [
-        new Link({
+    const links: Array<ILink> = [
+        {
             name:'link1',
             url:'url1',
             favicon:'favicon1'
-        }),
-        new Link({
+        },
+        {
             name:'link2',
             url:'url2',
             favicon:'favicon2'
-        }),
+        },
     ]
     const linkGroups: ILinkGroup = { id, name, links }
     const output = JSON.stringify([linkGroups])

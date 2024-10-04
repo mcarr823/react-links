@@ -55,7 +55,6 @@ to run it.
 ## TODO
 
 - Split back-end server and front-end website into separate repos
-- Add docker container and workflow
 - Create browser extension
 - Option to auto-sync with polling or websockets
 - Button to manually sync
