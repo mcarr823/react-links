@@ -1,22 +1,23 @@
 import Link from "./Link"
 import LinkGroup from "./LinkGroup"
 import ILinkGroup from "../interfaces/ILinkGroup"
+import ILink from "interfaces/ILink"
 
 /**
  * A basic test to make sure that the constructor works as intended.
  */
 test("Constructor test", () => {
 
-    const link1 = new Link({
+    const link1: ILink = {
         name:'GitHub',
         url:'https://github.com',
         favicon:''
-    })
-    const link2 = new Link({
+    }
+    const link2: ILink = {
         name:'Bitbucket',
         url:'https://bitbucket.com',
         favicon:''
-    })
+    }
     const links = [link1, link2]
     const args: ILinkGroup = {
         id: 1,
@@ -26,8 +27,12 @@ test("Constructor test", () => {
     const group = new LinkGroup(args)
 
     expect(group.name).toBe(args.name)
-    expect(group.links).toBe(links)
+    expect(group.links.length).toBe(links.length)
     expect(group.id).toBe(1)
+
+    // The links should have been converted from ILink to Link
+    expect(group.links[0]).toBeInstanceOf(Link)
+    expect(group.links[1]).toBeInstanceOf(Link)
 
 })
 
@@ -55,7 +60,9 @@ test("Validation success", () => {
  */
 test("Validation failure", () => {
 
-    const args = {} as ILinkGroup
+    const args = {
+        links:Array<ILink>()
+    } as ILinkGroup
     const group = new LinkGroup(args)
     const valid = group.validate()
 
@@ -68,16 +75,16 @@ test("Validation failure", () => {
  */
 test("Onetab export", () => {
 
-    const link1 = new Link({
+    const link1: ILink = {
         name:'GitHub',
         url:'https://github.com',
         favicon:''
-    })
-    const link2 = new Link({
+    }
+    const link2: ILink = {
         name:'Bitbucket',
         url:'https://bitbucket.com',
         favicon:''
-    })
+    }
     const links = [link1, link2]
     const args: ILinkGroup = {
         id: 1,

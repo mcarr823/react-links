@@ -1,4 +1,4 @@
-import Link from "../classes/Link";
+import ILink from "./ILink";
 
 /**
  * Interface which describes a LinkGroup object.
@@ -23,6 +23,6 @@ export default interface ILinkGroup {
      *
      * An empty list is allowed.
      */
-    links: Array<Link>;
+    links: Array<ILink>;
 
 }

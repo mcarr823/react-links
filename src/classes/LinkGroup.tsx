@@ -19,7 +19,7 @@ export default class LinkGroup implements ILinkGroup{
     constructor(args: ILinkGroup){
         this.id = args.id
         this.name = args.name
-        this.links = args.links
+        this.links = args.links.map(l => new Link(l))
     }
 
     /**
