@@ -24,12 +24,17 @@ export default function HomeViewModel(): IHomeViewModel {
 
     const addGroup = (linkGroup: LinkGroup) => {
 
-        // Find the largest ID out of the existing linkgroup entries,
-        // then add 1 to it in order to make a new sequential ID.
-        // Assign that new ID to the new linkgroup.
-        const ids = groups.map(l => l.id)
-        const biggestId = Math.max(...ids)
-        linkGroup.id = biggestId + 1
+        // If there's at least one existing group, then start by
+        // finding the largest ID out of the existing linkgroup entries.
+        // Add 1 to it in order to make a new sequential ID.
+        // If not, just set the ID to 1, since it's the first linkgroup.
+        if (groups.length > 0){
+            const ids = groups.map(l => l.id)
+            const biggestId = Math.max(...ids)
+            linkGroup.id = biggestId + 1
+        }else{
+            linkGroup.id = 1
+        }
 
         // Add the new linkgroup to the end of the array
         setGroups([
