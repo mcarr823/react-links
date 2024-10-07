@@ -5,6 +5,7 @@
  */
 
 import { isJest } from "./functions";
+import { Property } from 'csstype'
 
 /**
  * Defines where the JSON file used for storing the user's
@@ -18,3 +19,9 @@ import { isJest } from "./functions";
  * to export in order to adhere to the NextJS schema.
  */
 export const dataFile = isJest() ? "data/jest.json" : "data/links.json"
+
+export const defaultModalStyle = {
+    display: 'block',
+    background: '#000a',
+    textAlign: 'center' as Property.TextAlign
+}
