@@ -47,8 +47,25 @@ export default class LinkGroup implements ILinkGroup{
      * 
      * @returns Newline-delimited string of links in the Onetab format
      */
-    exportOnetab(): String {
+    exportOnetab(): string {
         return this.links.map(l => l.exportOnetab()).join("\n")
+    }
+
+    /**
+     * Converts a tab group from Onetab into a LinkGroup.
+     * 
+     * @param str String containing one or more newline-delimited Onetab tabs
+     * @returns A LinkGroup object
+     */
+    static importOnetab(str: string) : LinkGroup {
+        const links = str.split("\n")
+                        .filter(line => line.length > 0)
+                        .map(Link.importOnetab)
+        return new LinkGroup({
+            id:0,
+            name:'',
+            links
+        })
     }
 
 }

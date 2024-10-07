@@ -44,8 +44,23 @@ export default class Link implements ILink {
      * 
      * @returns String in the format of $url | $name
      */
-    exportOnetab(): String {
+    exportOnetab(): string {
         return `${this.url} | ${this.name}`
+    }
+
+    /**
+     * Converts a tab from Onetab into a Link.
+     * 
+     * @param str String containing a single Onetab tab
+     * @returns A Link object
+     */
+    static importOnetab(str: string): Link {
+        const chunks = str.split("|")
+        return new Link({
+            name:chunks[1],
+            url:chunks[0],
+            favicon:''
+        })
     }
 
 }
